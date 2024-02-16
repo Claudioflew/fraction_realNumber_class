@@ -1,0 +1,4 @@
+# ninja log v5
+1	546	1708050353323043358	CMakeFiles/Assignment9_FractionOverloadedOperators.dir/app.cpp.o	c49a78ecb713b1fb
+0	557	1708050353336711412	CMakeFiles/Assignment9_FractionOverloadedOperators.dir/RationalNumber.cpp.o	83672b81384fbcf
+557	671	1708050353451881456	Assignment9_FractionOverloadedOperators	caf2f2aa547be914
