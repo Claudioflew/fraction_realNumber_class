@@ -1,10 +1,11 @@
-#ifndef KOICHI_NAKATA_RATIONALNUMBER
-#define KOICHI_NAKATA_RATIONALNUMBER
+#ifndef RATIONALNUMBER_H
+#define RATIONALNUMBER_H
 
 #include <vector>
 
 // Comment 1: I decided to outsource this reduction work to a non-member function. This doesn't need to access to private data, so doesn't need to be a friend function.
-std::vector<int> reduceNumeDeno(int, int);
+std::vector<int> reduceFraction(int, int);
+int findGCD(int, int);
 
 class RationalNumber {
 public:
@@ -35,7 +36,6 @@ public:
 private:
   // Comment 4: I decided to store numerator and denominator in a vector.
   std::vector<int> numeDeno;
-
 };
 
 #endif

@@ -5,17 +5,20 @@
 
 using namespace std;
 
-vector<int> reduceNumeDeno(int nume, int deno) {
-  int num = 2;
-  while (num <= abs(nume) && num <= deno) {
-    while (nume % num == 0 && deno % num == 0) {
-      nume /= num;
-      deno /= num;
-    }
-    num++;
-  }
-  vector<int> reduced{nume, deno};
+vector<int> reduceFraction(int nume, int deno) {
+  int gcd = findGCD(nume, deno);
+
+  vector<int> reduced{nume/gcd, deno/gcd};
   return reduced;
+}
+
+int findGCD(int num1, int num2) {
+    while (num2 != 0) {
+        int rem = num1 % num2;
+        num1 = num2;
+        num2 = rem;
+    }
+    return num1;
 }
 
 // Comment 5: Default constructor which doesn't require any argument passed.
@@ -33,7 +36,7 @@ void RationalNumber::setNumeDeno(int nume, int deno) {
     } else {
       // Comment 6: We need this reduction operation everywhere in this program,
       // so it should be worked off by a function.
-      vector<int> temp = reduceNumeDeno(nume, deno);
+      vector<int> temp = reduceFraction(nume, deno);
       for (int num : temp) {
         numeDeno.push_back(num);
       }
@@ -53,46 +56,46 @@ void RationalNumber::printRational() const {
   }
 }
 
-RationalNumber RationalNumber::operator+(const RationalNumber &mou) const {
+RationalNumber RationalNumber::operator+(const RationalNumber& mou) const {
   // Comment 7: Simply multiple those two denominators to produce the big
   // denominator and multiple numerators by the denominators. The outcome will
   // need to be reduced, but we have the function to do that!
-  int bigDeno = getNumeDeno()[1] * mou.getNumeDeno()[1];
-  int bigNume = getNumeDeno()[0] * mou.getNumeDeno()[1] +
+  int deno = getNumeDeno()[1] * mou.getNumeDeno()[1];
+  int nume = getNumeDeno()[0] * mou.getNumeDeno()[1] +
                 getNumeDeno()[1] * mou.getNumeDeno()[0];
 
-  vector<int> temp = reduceNumeDeno(bigNume, bigDeno);
+  vector<int> temp = reduceFraction(nume, deno);
   return RationalNumber(temp[0], temp[1]);
 }
 
-RationalNumber RationalNumber::operator-(const RationalNumber &mou) const {
-  int bigDeno = getNumeDeno()[1] * mou.getNumeDeno()[1];
-  int bigNume = getNumeDeno()[0] * mou.getNumeDeno()[1] -
+RationalNumber RationalNumber::operator-(const RationalNumber& mou) const {
+  int deno = getNumeDeno()[1] * mou.getNumeDeno()[1];
+  int nume = getNumeDeno()[0] * mou.getNumeDeno()[1] -
                 getNumeDeno()[1] * mou.getNumeDeno()[0];
 
-  vector<int> temp = reduceNumeDeno(bigNume, bigDeno);
+  vector<int> temp = reduceFraction(nume, deno);
   return RationalNumber(temp[0], temp[1]);
 }
 
 RationalNumber RationalNumber::operator*(const RationalNumber &mou) const {
   // Comment 8: Multiplication is simple. If the outcome needs to be reduced, it
   // is no problem. We have the function to outsource.
-  int bigNume = getNumeDeno()[0] * mou.getNumeDeno()[0];
-  int bigDeno = getNumeDeno()[1] * mou.getNumeDeno()[1];
+  int nume = getNumeDeno()[0] * mou.getNumeDeno()[0];
+  int deno = getNumeDeno()[1] * mou.getNumeDeno()[1];
 
-  vector<int> temp = reduceNumeDeno(bigNume, bigDeno);
+  vector<int> temp = reduceFraction(nume, deno);
   return RationalNumber(temp[0], temp[1]);
 }
 
-RationalNumber RationalNumber::operator/(const RationalNumber &mou) const {
-  int bigNume = getNumeDeno()[0] * mou.getNumeDeno()[1];
-  int bigDeno = getNumeDeno()[1] * mou.getNumeDeno()[0];
+RationalNumber RationalNumber::operator/(const RationalNumber& mou) const {
+  int nume = getNumeDeno()[0] * mou.getNumeDeno()[1];
+  int deno = getNumeDeno()[1] * mou.getNumeDeno()[0];
 
-  vector<int> temp = reduceNumeDeno(bigNume, bigDeno);
+  vector<int> temp = reduceFraction(nume, deno);
   return RationalNumber(temp[0], temp[1]);
 }
 
-const RationalNumber &RationalNumber::operator=(const RationalNumber &mou) {
+const RationalNumber& RationalNumber::operator=(const RationalNumber& mou) {
   numeDeno.clear();
   for (int num : mou.getNumeDeno()) {
     numeDeno.push_back(num);
@@ -136,13 +139,13 @@ bool RationalNumber::operator==(const RationalNumber &mou) const {
   }
 }
 
-bool RationalNumber::operator!=(const RationalNumber &mou) const {
+bool RationalNumber::operator!=(const RationalNumber& mou) const {
   return !(*this == mou);
 }
 
-bool RationalNumber::operator>=(const RationalNumber &mou) const {
+bool RationalNumber::operator>=(const RationalNumber& mou) const {
   return !(*this < mou);
 }
-bool RationalNumber::operator<=(const RationalNumber &mou) const {
+bool RationalNumber::operator<=(const RationalNumber& mou) const {
   return !(*this > mou);
 }
