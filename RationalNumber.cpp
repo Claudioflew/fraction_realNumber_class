@@ -103,7 +103,7 @@ const RationalNumber& RationalNumber::operator=(const RationalNumber& mou) {
   return *this;
 }
 
-bool RationalNumber::operator<(const RationalNumber &mou) const {
+bool RationalNumber::operator<(const RationalNumber& mou) const {
   // Comment 9: We can't compare fractions, so convert them to decimals.
   double thisFloat = (double)getNumeDeno()[0] / (double)getNumeDeno()[1];
   double mouFloat = (double)mou.getNumeDeno()[0] / (double)mou.getNumeDeno()[1];
@@ -115,7 +115,7 @@ bool RationalNumber::operator<(const RationalNumber &mou) const {
   }
 }
 
-bool RationalNumber::operator>(const RationalNumber &mou) const {
+bool RationalNumber::operator>(const RationalNumber& mou) const {
   // Comment 10: If we define these correctly, remaining syntax will be easier
   // (< and >)
   double thisFloat = (double)getNumeDeno()[0] / (double)getNumeDeno()[1];
