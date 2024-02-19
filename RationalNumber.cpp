@@ -1,5 +1,4 @@
 #include "RationalNumber.h"
-#include <cstdlib>
 #include <iostream>
 #include <vector>
 
@@ -65,7 +64,7 @@ RationalNumber RationalNumber::operator+(const RationalNumber& mou) const {
                 getNumeDeno()[1] * mou.getNumeDeno()[0];
 
   vector<int> temp = reduceFraction(nume, deno);
-  return RationalNumber(temp[0], temp[1]);
+  return RationalNumber(temp[0], temp[1]); // Unnamed object
 }
 
 RationalNumber RationalNumber::operator-(const RationalNumber& mou) const {
@@ -77,7 +76,7 @@ RationalNumber RationalNumber::operator-(const RationalNumber& mou) const {
   return RationalNumber(temp[0], temp[1]);
 }
 
-RationalNumber RationalNumber::operator*(const RationalNumber &mou) const {
+RationalNumber RationalNumber::operator*(const RationalNumber& mou) const {
   // Comment 8: Multiplication is simple. If the outcome needs to be reduced, it
   // is no problem. We have the function to outsource.
   int nume = getNumeDeno()[0] * mou.getNumeDeno()[0];
